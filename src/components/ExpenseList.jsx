@@ -22,7 +22,7 @@ const ExpenseList = ({ expenseItems, handleDelete }) => {
                 <li className="list-group-item d-flex justify-content-between">
                   <span
                     className="text-secondary fw-bold"
-                    style={{ minWidth: 130 }}
+                    style={{ minWidth: 120 }}
                   >
                     <img
                       src={next}
@@ -35,7 +35,7 @@ const ExpenseList = ({ expenseItems, handleDelete }) => {
                   </span>
                   <span
                     className="text-secondary fw-bold"
-                    style={{ minWidth: 120 }}
+                    style={{ minWidth: 100 }}
                   >
                     {"$ " + item.amount}
                   </span>
@@ -50,7 +50,7 @@ const ExpenseList = ({ expenseItems, handleDelete }) => {
                           maxHeight: 20,
                           cursor: "pointer",
                         }}
-                        className="delete-icon me-2 "
+                        className="delete-icon me-1 "
                         alt="Remove Icon"
                         onClick={() => handleDelete(item.id)}
                         onMouseEnter={() => setHoveredItemId(item.id)}
