@@ -35,7 +35,7 @@ const ExpenseList = ({ expenseItems, handleDelete }) => {
                   </span>
                   <span
                     className="text-secondary fw-bold"
-                    style={{ minWidth: 150 }}
+                    style={{ minWidth: 100 }}
                   >
                     {"$ " + item.amount}
                   </span>
