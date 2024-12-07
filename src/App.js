@@ -38,6 +38,7 @@ function App() {
                 <div className="card-body">
                   <h2>Set Your Budget</h2>
                   <input
+                    className="form-control"
                     type="number"
                     value={budget}
                     onChange={(event) => {
