@@ -33,7 +33,7 @@ function App() {
       <div className="container-fluid bg-secondary  ">
         <div className="row min-vh-100 d-flex align-items-center justify-content-center">
           <div className="col-sm-12 col-md-6 col-lg-6">
-            <div className="container mb-3 mt-2">
+            <div className="container-fluid mb-3 mt-2">
               <div className="card">
                 <div className="card-body">
                   <h2>Set Your Budget</h2>
