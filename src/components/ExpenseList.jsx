@@ -22,7 +22,7 @@ const ExpenseList = ({ expenseItems, handleDelete }) => {
                 <li className="list-group-item d-flex justify-content-between">
                   <span
                     className="text-secondary fw-bold"
-                    style={{ minWidth: 100 }}
+                    style={{ minWidth: 130 }}
                   >
                     <img
                       src={next}
