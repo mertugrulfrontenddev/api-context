@@ -3,18 +3,19 @@ import xButtonIcon from "../images/x-button.png";
 import wallet from "../images/wallet.png";
 import next from "../images/next.png";
 import { useState } from "react";
-const ExpenseList = ({ expenseItems, handleDelete, budget }) => {
+const ExpenseList = ({ expenseItems, handleDelete, budget, totalExpense }) => {
   const [hoveredItemId, setHoveredItemId] = useState(false);
-  const totalExpense = expenseItems.reduce(
-    (total, item) => total + parseFloat(item.amount),
-    0
-  );
+
   return (
     <div className="container-fluid mt-2">
       <div className="card">
         <div className="card-body">
           <h3>Expense List</h3>
-
+          <h5 style={{ color: totalExpense > budget ? "red" : "green" }}>
+            {totalExpense > budget
+              ? "Warning! You've exceeded your budget!"
+              : "Expenses are under control."}
+          </h5>
           <div className="d-flex justify-content-between">
             <h5>Total Expense: ${totalExpense.toFixed(2)}</h5>
             <h5>Remaining Budget: ${budget - totalExpense}</h5>
