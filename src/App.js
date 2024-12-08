@@ -55,6 +55,7 @@ function App() {
             <ExpenseList
               expenseItems={expenseItems}
               handleDelete={handleDelete}
+              budget={budget}
             />
           </div>
         </div>

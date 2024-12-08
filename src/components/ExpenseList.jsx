@@ -3,7 +3,7 @@ import xButtonIcon from "../images/x-button.png";
 import wallet from "../images/wallet.png";
 import next from "../images/next.png";
 import { useState } from "react";
-const ExpenseList = ({ expenseItems, handleDelete }) => {
+const ExpenseList = ({ expenseItems, handleDelete, budget }) => {
   const [hoveredItemId, setHoveredItemId] = useState(false);
   const totalExpense = expenseItems.reduce(
     (total, item) => total + parseFloat(item.amount),
@@ -15,14 +15,18 @@ const ExpenseList = ({ expenseItems, handleDelete }) => {
         <div className="card-body">
           <h3>Expense List</h3>
 
-          <h5>Total Expense: ${totalExpense.toFixed(2)}</h5>
+          <div className="d-flex justify-content-between">
+            <h5>Total Expense: ${totalExpense.toFixed(2)}</h5>
+            <h5>Remaining Budget: ${budget - totalExpense}</h5>
+          </div>
+
           <ul className="list-group">
             {expenseItems.length > 0 ? (
               expenseItems.map((item) => (
                 <li className="list-group-item d-flex justify-content-between">
                   <span
                     className="text-secondary fw-bold"
-                    style={{ minWidth: 120 }}
+                    style={{ minWidth: 130 }}
                   >
                     <img
                       src={next}

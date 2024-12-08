@@ -14,6 +14,9 @@ const ExpenseForm = ({ handleExpense }) => {
     setAmount(event.target.value); // amount'u string olarak tutuyoruz, sayıya dönüştürmemize gerek yok
   };
 
+  const handleFocus = (event) => {
+    event.target.select();
+  };
   const handleSubmit = () => {
     if (expenseType && amount) {
       // Harcama bilgisini gönder
@@ -43,7 +46,8 @@ const ExpenseForm = ({ handleExpense }) => {
               className="form-control"
               id="expenseType"
               value={expenseType}
-              onChange={handleChange} // Daha kısa yazım
+              onChange={handleChange}
+              // Daha kısa yazım
             >
               <option value="">Please Select</option>
               <option value="food">Food</option>
@@ -59,7 +63,8 @@ const ExpenseForm = ({ handleExpense }) => {
               className="form-control"
               id="amount"
               value={amount}
-              onChange={handleAmountChange} // Harcama miktarı değiştiğinde
+              onChange={handleAmountChange}
+              onFocus={handleFocus} // Harcama miktarı değiştiğinde
               placeholder="Enter amount"
             />
 
