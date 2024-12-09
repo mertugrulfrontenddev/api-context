@@ -1,36 +1,28 @@
 import "./App.css";
-
-import React, { useState } from "react";
+import { ExpenseContext } from "./context/ExpenseContext";
+import React, { useState, useContext } from "react";
 import ExpenseForm from "./components/ExpenseForm";
 import ExpenseList from "./components/ExpenseList";
 
+import { ExpenseProvider } from "./context/ExpenseContext";
+
 function App() {
   const [budget, setBudget] = useState(0);
-  let [expenseItems, setExpenseItems] = useState([]);
+
   let [showmodal, setShowmodal] = useState(true);
+  const {
+    expenseItems,
+    setExpenseItems,
+    handleDelete,
+    handleExpense,
+    totalExpense,
+  } = useContext(ExpenseContext);
 
-  function handleExpense({ expenseType, amount }) {
-    setExpenseItems((prevItems) => [
-      ...prevItems,
-      { id: Date.now(), expenseType, amount },
-    ]);
-  }
-
-  const totalExpense = expenseItems.reduce(
-    (total, item) => total + parseFloat(item.amount),
-    0
-  );
   function handleBudgetChange(event) {
     setBudget(Number(event.target.value));
   }
   function handleFocus(event) {
     event.target.select(); // İçeriği seçili yapar
-  }
-
-  function handleDelete(expenseId) {
-    setExpenseItems((prevList) =>
-      prevList.filter((listItem) => listItem.id !== expenseId)
-    );
   }
 
   function handleSetBudget(newBudget) {
@@ -73,7 +65,7 @@ function App() {
                     </div>
                   </div>
                 </div>
-                <ExpenseForm handleExpense={handleExpense} />
+                <ExpenseForm />
 
                 <ExpenseList
                   expenseItems={expenseItems}

@@ -1,11 +1,7 @@
-import removeIcon from "../images/remove.png";
-import xButtonIcon from "../images/x-button.png";
-import wallet from "../images/wallet.png";
-import next from "../images/next.png";
 import { useState } from "react";
+import ExpenseItem from "./ExpenseItem";
+import wallet from "../images/wallet.png";
 const ExpenseList = ({ expenseItems, handleDelete, budget, totalExpense }) => {
-  const [hoveredItemId, setHoveredItemId] = useState(false);
-
   return (
     <div className="container-fluid mt-2">
       <div className="card">
@@ -20,50 +16,10 @@ const ExpenseList = ({ expenseItems, handleDelete, budget, totalExpense }) => {
             <h5>Total Expense: ${totalExpense.toFixed(2)}</h5>
             <h5>Remaining Budget: ${budget - totalExpense}</h5>
           </div>
-
           <ul className="list-group">
             {expenseItems.length > 0 ? (
               expenseItems.map((item) => (
-                <li className="list-group-item d-flex justify-content-between">
-                  <span
-                    className="text-secondary fw-bold"
-                    style={{ minWidth: 130 }}
-                  >
-                    <img
-                      src={next}
-                      style={{ maxWidth: 15, maxHeight: 15 }}
-                      className="me-2 "
-                      alt=""
-                    />
-                    {item.expenseType.charAt(0).toUpperCase() +
-                      item.expenseType.slice(1)}
-                  </span>
-                  <span
-                    className="text-secondary fw-bold"
-                    style={{ minWidth: 100 }}
-                  >
-                    {"$ " + item.amount}
-                  </span>
-                  <div>
-                    <span>
-                      <img
-                        src={
-                          hoveredItemId === item.id ? xButtonIcon : removeIcon
-                        } // Resmi src olarak ekliyoruz
-                        style={{
-                          maxWidth: 20,
-                          maxHeight: 20,
-                          cursor: "pointer",
-                        }}
-                        className="delete-icon me-1 "
-                        alt="Remove Icon"
-                        onClick={() => handleDelete(item.id)}
-                        onMouseEnter={() => setHoveredItemId(item.id)}
-                        onMouseLeave={() => setHoveredItemId(null)}
-                      />
-                    </span>
-                  </div>
-                </li>
+                <ExpenseItem item={item} handleDelete={handleDelete} />
               ))
             ) : (
               <div className="d-flex  flex-column  justify-content-center ">

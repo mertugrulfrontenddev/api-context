@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-
-const ExpenseForm = ({ handleExpense }) => {
+import React, { useContext, useState } from "react";
+import { ExpenseContext } from "../context/ExpenseContext";
+const ExpenseForm = () => {
   const [expenseType, setExpenseType] = useState("");
   const [amount, setAmount] = useState(0);
+
+  const { handleExpense } = useContext(ExpenseContext);
 
   // Expense type değiştiğinde tetiklenen fonksiyon
   const handleChange = (event) => {
