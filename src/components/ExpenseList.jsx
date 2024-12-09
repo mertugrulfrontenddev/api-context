@@ -29,7 +29,7 @@ const ExpenseList = ({ expenseItems, handleDelete, budget, totalExpense }) => {
             <AnimatePresence>
               {expenseItems.length > 0 ? (
                 expenseItems.map((item) => (
-                  <motion.li
+                  <motion.div
                     key={item.id}
                     initial={{ opacity: 0, x: -100 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -37,7 +37,7 @@ const ExpenseList = ({ expenseItems, handleDelete, budget, totalExpense }) => {
                     className="list-group-item"
                   >
                     <ExpenseItem item={item} handleDelete={handleDelete} />
-                  </motion.li>
+                  </motion.div>
                 ))
               ) : (
                 <motion.div
