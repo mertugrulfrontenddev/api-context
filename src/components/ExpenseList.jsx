@@ -44,7 +44,7 @@ const ExpenseList = ({ expenseItems, handleDelete, budget, totalExpense }) => {
                   key="empty-state"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  exit={{ opacity: 0, y: 100 }}
+                  exit={{ opacity: 0 }}
                   className="d-flex flex-column justify-content-center"
                 >
                   <div className="card">

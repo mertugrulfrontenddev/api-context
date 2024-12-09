@@ -12,11 +12,7 @@ const ExpenseItem = ({ item, handleDelete }) => {
   const [hoveredItemId, setHoveredItemId] = useState(null);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, x: -100 }} // İlk yüklemede soldan gelerek görünür
-      animate={{ opacity: 1, x: 0 }} // Görünür hale gelir
-      exit={{ opacity: 0, x: 100 }} // Sağ tarafa kayarak silinir
-    >
+    <div>
       <li className="list-group-item d-flex justify-content-between">
         {/* Harcama türü */}
         <span className="text-secondary fw-bold" style={{ minWidth: 130 }}>
@@ -51,7 +47,7 @@ const ExpenseItem = ({ item, handleDelete }) => {
           />
         </div>
       </li>
-    </motion.div>
+    </div>
   );
 };
 
