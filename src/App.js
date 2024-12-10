@@ -1,15 +1,24 @@
 import "./App.css";
 import { ExpenseContext } from "./context/ExpenseContext";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import ExpenseForm from "./components/ExpenseForm";
 import ExpenseList from "./components/ExpenseList";
-
 import { ExpenseProvider } from "./context/ExpenseContext";
 
 function App() {
-  const [budget, setBudget] = useState(0);
+  const [budget, setBudget] = useState(0); // Başlangıçta bütçe 0
+  const [showmodal, setShowmodal] = useState(false); // Modal'ı kontrol etmek için state
 
-  let [showmodal, setShowmodal] = useState(true);
+  useEffect(() => {
+    // Sayfa yüklendiğinde localStorage'dan bütçeyi al
+    const savedBudget = localStorage.getItem("budget");
+    if (savedBudget) {
+      setBudget(JSON.parse(savedBudget)); // Eğer localStorage'da bütçe varsa, state'i güncelle
+    } else {
+      setShowmodal(true); // Eğer bütçe yoksa, modalı göster
+    }
+  }, []); // Bu effect sadece sayfa ilk yüklendiğinde çalışır
+
   const {
     expenseItems,
     setExpenseItems,
@@ -21,14 +30,11 @@ function App() {
   function handleBudgetChange(event) {
     setBudget(Number(event.target.value));
   }
-  function handleFocus(event) {
-    event.target.select(); // İçeriği seçili yapar
-  }
 
   function handleSetBudget(newBudget) {
     setBudget(Number(newBudget));
-
-    setShowmodal(false);
+    localStorage.setItem("budget", JSON.stringify(Number(newBudget))); // Bütçeyi localStorage'a kaydet
+    setShowmodal(false); // Modal'ı kapat
   }
 
   return (
@@ -36,6 +42,7 @@ function App() {
       <div className="container-fluid bg-secondary  ">
         <div className="row min-vh-100 d-flex align-items-center justify-content-center">
           <div className="col-sm-12 col-md-6 col-lg-6">
+            {/* Eğer bütçe varsa ve modal kapalıysa, bu kısmı göster */}
             {!showmodal && (
               <>
                 <div className="container-fluid mb-3 mt-2">
@@ -49,24 +56,22 @@ function App() {
                         {totalExpense > budget && (
                           <span style={{ color: "red" }}> (Exceeded)</span>
                         )}
-                        <p>
-                          <button
-                            className="mt-2 btn bg-primary text-white"
-                            onClick={() => {
-                              setShowmodal(true);
-
-                              setBudget(0);
-                            }}
-                          >
-                            Reset Budget
-                          </button>
-                        </p>
+                      </p>
+                      <p>
+                        <button
+                          className="mt-2 btn bg-primary text-white"
+                          onClick={() => {
+                            setShowmodal(true); // Modal'ı tekrar göster
+                            setBudget(0); // Bütçeyi sıfırla
+                          }}
+                        >
+                          Reset Budget
+                        </button>
                       </p>
                     </div>
                   </div>
                 </div>
                 <ExpenseForm />
-
                 <ExpenseList
                   expenseItems={expenseItems}
                   handleDelete={handleDelete}
@@ -76,6 +81,7 @@ function App() {
               </>
             )}
 
+            {/* Eğer showmodal true ise, modalı göster */}
             {showmodal && (
               <>
                 <div
@@ -83,7 +89,6 @@ function App() {
                     position: "fixed",
                     left: 0,
                     top: 0,
-
                     width: "100%",
                     height: "100%",
                     display: "flex",
@@ -107,13 +112,9 @@ function App() {
                       className="form-control"
                       type="number"
                       value={budget}
-                      onChange={(event) => {
-                        handleBudgetChange(event);
-                      }}
-                      onFocus={handleFocus}
-                      placeholder="Bütçenizi girin"
+                      onChange={handleBudgetChange}
+                      placeholder="Enter Your Budget"
                     />
-
                     <button
                       className="mt-2 btn bg-primary text-white"
                       onClick={() => handleSetBudget(budget)}
